@@ -29,9 +29,9 @@ RSpec.describe 'movies results page' do
   it 'can search for movies by title from the discover movies page' do
     visit(user_discover_index_path(@user1.id))
 
-    # json_response = File.read('spec/fixtures/search_movies.json')
-    # stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=a9f28a7ce46d86cfac371bf3b2883ad5&query=Test").
-    #   to_return(status: 200, body: json_response)
+    json_response = File.read('spec/fixtures/search_movies.json')
+    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=a9f28a7ce46d86cfac371bf3b2883ad5&query=Test").
+      to_return(status: 200, body: json_response)
 
     expect(page).to have_field(:title)
     expect(page).to have_button("Search")

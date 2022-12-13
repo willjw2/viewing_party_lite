@@ -14,14 +14,13 @@ RSpec.describe 'new user page' do
 
       expect(page).to have_field("Name")
       expect(page).to have_field("Email")
-      expect(page).to have_field("Password")
     end
 
     it 'I see a button to create new user' do
       visit "/register"
 
-      fill_in("Name", with: "William")
-      fill_in("Email", with: "William@gmail.com")
+      fill_in("Name", with: "Will")
+      fill_in("Email", with: "willjw@gmail.com")
 
       expect(page).to have_button("Register New User")
 
