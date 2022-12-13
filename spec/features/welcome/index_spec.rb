@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'welcome index page' do
   before :each do
-    @user1 = User.create!(name: "William", email: "William@gmail.com", password: 'pw123', password_confirmation: 'pw123')
-    @user2 = User.create!(name: "Ashley", email: "Ashley@gmail.com", password: 'pw123', password_confirmation: 'pw123')
-    @user3 = User.create!(name: "Abdul", email: "Abdul@gmail.com", password: 'pw123', password_confirmation: 'pw123')
+    @user1 = User.create!(name: "William", email: "William@gmail.com")
+    @user2 = User.create!(name: "Ashley", email: "Ashley@gmail.com")
+    @user3 = User.create!(name: "Abdul", email: "Abdul@gmail.com")
     visit(root_path)
   end
   it 'should include title of the application' do
@@ -30,14 +30,5 @@ RSpec.describe 'welcome index page' do
     expect(page).to have_link("Home Page")
     click_link "Home Page"
     expect(current_path).to eq(root_path)
-  end
-
-  it 'I see a link for login' do 
-    expect(page).to have_link("Login")
-  end
-
-  it 'when I click the link, I am taken to a login page where i input unique email and password' do 
-    click_link "Login"
-    expect(current_path).to eq(login_path)
   end
 end

@@ -4,13 +4,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :create] do
     resources :discover, only: [:index]
-    resources :movies, only: [:index, :show] do 
+    resources :movies, only: [:index, :show] do
       resources :viewing_party, only: [:new, :create]
     end
   end
 
   get '/register', to: 'users#new'
-  post '/register', to: 'users#create'
-  get '/login', to: 'users#login_form'
-  post '/login', to: 'users#login_user'
 end
