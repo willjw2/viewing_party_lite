@@ -8,20 +8,10 @@ RSpec.describe 'movies results page' do
 
 
     json_response = File.read('spec/fixtures/top_rated_movies.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV["movie_api_key"]}").
+      to_return(status: 200, body: json_response)
 
-    details_response = File.read('spec/fixtures/shawshank_details.json')
-    stub_request(:get, "https://api.themoviedb.org/3/movie/278?api_key=#{ENV["movie_api_key"]}").
-      to_return(status: 200, body: details_response)
-
-    credits_response = File.read('spec/fixtures/shawshank_credits.json')
-    stub_request(:get, "https://api.themoviedb.org/3/movie/278/credits?api_key=#{ENV["movie_api_key"]}").
-      to_return(status: 200, body: credits_response)
-
-    reviews_response = File.read('spec/fixtures/shawshank_reviews.json')
-    stub_request(:get, "https://api.themoviedb.org/3/movie/278/reviews?api_key=#{ENV["movie_api_key"]}").
-      to_return(status: 200, body: reviews_response)
-
-    visit(user_movies_path(@user1.id, 278))
+    visit(user_movies_path(@user1.id))
   end
 
   it 'displays the titles and vote average of the top 20 movies' do
@@ -72,17 +62,17 @@ RSpec.describe 'movies results page' do
     # stub_request(:get, ("https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV["movie_api_key"]}")).
     #   to_return(status: 200, body: json_response)
 
-    # details_response = File.read('spec/fixtures/shawshank_details.json')
-    # stub_request(:get, "https://api.themoviedb.org/3/movie/278?api_key=#{ENV["movie_api_key"]}").
-    #   to_return(status: 200, body: details_response)
+    details_response = File.read('spec/fixtures/shawshank_details.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/278?api_key=#{ENV["movie_api_key"]}").
+      to_return(status: 200, body: details_response)
 
-    # credits_response = File.read('spec/fixtures/shawshank_credits.json')
-    # stub_request(:get, "https://api.themoviedb.org/3/movie/278/credits?api_key=#{ENV["movie_api_key"]}").
-    #   to_return(status: 200, body: credits_response)
+    credits_response = File.read('spec/fixtures/shawshank_credits.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/278/credits?api_key=#{ENV["movie_api_key"]}").
+      to_return(status: 200, body: credits_response)
 
-    # reviews_response = File.read('spec/fixtures/shawshank_reviews.json')
-    # stub_request(:get, "https://api.themoviedb.org/3/movie/278/reviews?api_key=#{ENV["movie_api_key"]}").
-    #   to_return(status: 200, body: reviews_response)
+    reviews_response = File.read('spec/fixtures/shawshank_reviews.json')
+    stub_request(:get, "https://api.themoviedb.org/3/movie/278/reviews?api_key=#{ENV["movie_api_key"]}").
+      to_return(status: 200, body: reviews_response)
 
     expect(page).to have_link("The Shawshank Redemption")
     click_link "The Shawshank Redemption"
